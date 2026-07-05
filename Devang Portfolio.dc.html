@@ -1,0 +1,544 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bangers&family=Shantell+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400;1,600&display=swap" rel="stylesheet">
+<style>
+  *{ box-sizing:border-box; }
+  html,body{ margin:0; padding:0; background:#ffffff; overflow:hidden; }
+  ::-webkit-scrollbar{ display:none; }
+  @keyframes chibiBob{ 0%,100%{ transform:translateY(0) rotate(-.6deg);} 50%{ transform:translateY(-6px) rotate(.6deg);} }
+  @keyframes floaty{ 0%,100%{ transform:translateY(0);} 50%{ transform:translateY(-10px);} }
+  @keyframes dashHint{ 0%{ transform:translateX(0);} 50%{ transform:translateX(9px);} 100%{ transform:translateX(0);} }
+  @keyframes sway{ 0%,100%{ transform:rotate(-2deg);} 50%{ transform:rotate(2deg);} }
+
+  :root {
+    --header-height: 57px;
+    --sec-padding-top: 13vh;
+    --sec-padding-side: 5vw;
+    --sec-padding-bottom: 43vh;
+    --sec-overflow-y: hidden;
+    --hero-width: 96vw;
+    --hero-min-width: 640px;
+    --about-width: 78vw;
+    --about-min-width: 600px;
+    --exp-width: 80vw;
+    --exp-min-width: 640px;
+    --lead-width: auto;
+    --lead-min-width: 640px;
+    --skills-width: auto;
+    --skills-min-width: 560px;
+    --hl-width: auto;
+    --hl-min-width: 600px;
+    --edu-width: 66vw;
+    --edu-min-width: 560px;
+    --phil-width: 82vw;
+    --phil-min-width: 640px;
+    --contact-width: 88vw;
+    --contact-min-width: 640px;
+    --card-max-width: 640px;
+    --card-max-height: none;
+    --card-overflow-y: visible;
+    --card-padding: 30px 34px;
+    --body-font-size: 18.5px;
+    --body-font-size-exp: 18px;
+    --h2-font-size: 40px;
+    --h2-font-size-exp: 38px;
+    --lead-flex-direction: row;
+    --lead-group-direction: row;
+    --lead-group-width: auto;
+    --lead-org-width: 132px;
+    --lead-card-width: 230px;
+    --hl-flex-direction: row;
+    --hl-card-width: 224px;
+    --chibi-width: 28vh;
+    --chibi-height: 35vh;
+    --chibi-shadow-width: 20vh;
+    --chibi-bottom: 5.4vh;
+    --ground-bottom: 6.6vh;
+  }
+  .top-header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 40;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 14px;
+    padding: 12px 22px;
+    background: rgba(255, 255, 255, 0.92);
+    backdrop-filter: blur(4px);
+    border-bottom: 2.5px solid #141210;
+    height: var(--header-height);
+  }
+  @media (max-width: 768px) {
+    :root {
+      --header-height: 48px;
+      --sec-padding-top: 10vh;
+      --sec-padding-side: 6vw;
+      --sec-padding-bottom: 26vh;
+      --sec-overflow-y: auto;
+      --hero-width: 100vw;
+      --hero-min-width: 100vw;
+      --about-width: 100vw;
+      --about-min-width: 100vw;
+      --exp-width: 100vw;
+      --exp-min-width: 100vw;
+      --lead-width: 100vw;
+      --lead-min-width: 100vw;
+      --skills-width: 100vw;
+      --skills-min-width: 100vw;
+      --hl-width: 100vw;
+      --hl-min-width: 100vw;
+      --edu-width: 100vw;
+      --edu-min-width: 100vw;
+      --phil-width: 100vw;
+      --phil-min-width: 100vw;
+      --contact-width: 100vw;
+      --contact-min-width: 100vw;
+      --card-max-width: 90vw;
+      --card-max-height: 48vh;
+      --card-overflow-y: auto;
+      --card-padding: 16px 18px;
+      --body-font-size: 15px;
+      --body-font-size-exp: 15px;
+      --h2-font-size: 26px;
+      --h2-font-size-exp: 26px;
+      --lead-flex-direction: column;
+      --lead-group-direction: column;
+      --lead-group-width: 100%;
+      --lead-org-width: 100%;
+      --lead-card-width: 100%;
+      --hl-flex-direction: column;
+      --hl-card-width: 100%;
+      --chibi-width: 20vh;
+      --chibi-height: 25vh;
+      --chibi-shadow-width: 14vh;
+      --chibi-bottom: 3.8vh;
+      --ground-bottom: 4.8vh;
+    }
+    .top-header {
+      padding: 8px 14px;
+      gap: 8px;
+    }
+    .logo-sub {
+      display: none !important;
+    }
+    .top-nav {
+      flex-wrap: nowrap !important;
+      overflow-x: auto !important;
+      -webkit-overflow-scrolling: touch;
+      max-width: 60%;
+      scrollbar-width: none;
+    }
+    .top-nav::-webkit-scrollbar {
+      display: none;
+    }
+    .scroll-track {
+      scroll-snap-type: x mandatory !important;
+    }
+  }
+</style>
+</helmet>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs>
+  <filter id="wob"><feTurbulence type="fractalNoise" baseFrequency="0.015" numOctaves="2" seed="7" result="n"/><feDisplacementMap in="SourceGraphic" in2="n" scale="4"/></filter>
+  <filter id="wob2"><feTurbulence type="fractalNoise" baseFrequency="0.02" numOctaves="2" seed="3" result="n"/><feDisplacementMap in="SourceGraphic" in2="n" scale="3"/></filter>
+</defs></svg>
+
+<div ref="{{ setRoot }}" style="--accent:#E23A2C; position:relative; width:100%; height:100vh; overflow:hidden; background:#ffffff; color:#141210; font-family:'Shantell Sans',cursive; font-weight:400;">
+
+  <!-- ===== TOP NAV ===== -->
+  <div class="top-header">
+    <div onClick="{{ goHome }}" style="cursor:pointer; display:flex; align-items:baseline; gap:8px; flex-shrink:0; white-space:nowrap;">
+      <span class="logo-text" style="font-family:'Bangers',cursive; font-size:24px; letter-spacing:1px; color:#141210; white-space:nowrap;">DEVANG C V</span>
+      <span class="logo-sub" style="font-size:13px; color:#7a756f; font-style:italic;">/ portfolio</span>
+    </div>
+    <nav class="top-nav" style="display:flex; align-items:center; gap:4px; flex-wrap:wrap;">
+      <sc-for list="{{ nav }}" as="item" hint-placeholder-count="9">
+        <button onClick="{{ item.go }}" style="font-family:'Shantell Sans',cursive; font-weight:600; font-size:14.5px; color:#141210; background:none; border:none; padding:7px 11px; border-radius:8px; cursor:pointer;" style-hover="background:#141210; color:#fff;">{{ item.label }}</button>
+      </sc-for>
+    </nav>
+  </div>
+  <div style="position:fixed; top:var(--header-height); left:0; right:0; z-index:39; height:4px; background:#efeae3;"><div ref="{{ setProg }}" style="height:100%; width:0%; background:var(--accent);"></div></div>
+
+  <!-- ===== FIXED HORIZON GROUND LINE ===== -->
+  <div style="position:fixed; left:-14px; right:-14px; bottom:var(--ground-bottom); z-index:5; height:3px; background:#141210; filter:url(#wob);"></div>
+  <div style="position:fixed; left:0; right:0; bottom:0; z-index:4; height:var(--ground-bottom); background:linear-gradient(180deg, rgba(20,18,16,.06), rgba(20,18,16,0));"></div>
+
+  <!-- ===== FIXED WALKING CHIBI ===== -->
+  <div ref="{{ setChibi }}" style="--face:1; position:fixed; left:50%; bottom:var(--chibi-bottom); z-index:20; transform:translateX(-50%) scaleX(var(--face)); pointer-events:none; will-change:transform;">
+    <div ref="{{ setChibiBob }}" style="animation:none; transform-origin:50% 100%;">
+      <div style="position:relative; width:var(--chibi-width); height:var(--chibi-height); max-width:242px; max-height:302px; overflow:hidden;">
+        <img ref="{{ setVideo }}" src="assets/frames/f000.png" alt="Devang" style="position:absolute; top:0; left:-61.2%; width:222.6%; height:auto; filter:brightness(1.03) contrast(1.02); display:block;" />
+      </div>
+    </div>
+    <div style="position:absolute; left:50%; bottom:1vh; transform:translateX(-50%); width:var(--chibi-shadow-width); max-width:170px; height:2.4vh; background:radial-gradient(ellipse at center, rgba(20,18,16,.22), rgba(20,18,16,0) 70%);"></div>
+  </div>
+
+  <!-- ===== HORIZONTAL WORLD ===== -->
+  <div ref="{{ setTrack }}" class="scroll-track" style="position:absolute; inset:0; display:flex; align-items:stretch; overflow-x:auto; overflow-y:hidden; scrollbar-width:none; -webkit-overflow-scrolling: touch;">
+
+    <!-- ---- HERO ---- -->
+    <section id="hero" data-screen-label="Hero" style="flex:0 0 auto; position:relative; height:100vh; width:var(--hero-width); min-width:var(--hero-min-width); display:flex; flex-direction:column; justify-content:center; align-items:center; text-align:center; padding:var(--sec-padding-top) var(--sec-padding-side) var(--sec-padding-bottom); overflow-y:var(--sec-overflow-y); scroll-snap-align:start;">
+      <div data-reveal="translateY(28px)" style="display:inline-block; transform:rotate(-1.5deg); background:var(--accent); color:#fff; font-family:'Bangers',cursive; font-size:15px; letter-spacing:2px; padding:5px 14px; border:2.5px solid #141210; box-shadow:4px 4px 0 #141210; margin-bottom:20px;">A WALK THROUGH MY STORY</div>
+      <h1 data-reveal="translateY(34px)" style="font-family:'Bangers',cursive; font-size:clamp(40px,11vw,150px); line-height:.92; letter-spacing:2px; margin:0; color:#141210; text-shadow:5px 5px 0 rgba(20,18,16,.12);">DEVANG&nbsp;C&nbsp;V</h1>
+      <p data-reveal="translateY(24px)" style="margin:20px 0 0; font-size:clamp(17px,2vw,23px); font-weight:600; letter-spacing:.3px; color:#37322d;">Software Engineer&nbsp;&nbsp;·&nbsp;&nbsp;Startup COO&nbsp;&nbsp;·&nbsp;&nbsp;IEEE Leader</p>
+      <p data-reveal="translateY(24px)" style="margin:8px 0 0; font-size:16px; font-style:italic; color:#8a847d;">Building products, teams, and communities — from concept to deployment.</p>
+      <div class="scroll-hint" style="margin-top:34px; display:flex; align-items:center; gap:10px; font-family:'Bangers',cursive; letter-spacing:1.5px; font-size:19px; color:#141210;">
+        <span>SCROLL / DRAG</span>
+        <span style="display:inline-block; animation:dashHint 1s ease-in-out infinite; font-size:26px;">→</span>
+      </div>
+    </section>
+
+    <!-- ---- ABOUT ---- -->
+    <section id="about" data-screen-label="About" style="flex:0 0 auto; position:relative; height:100vh; width:var(--about-width); min-width:var(--about-min-width); display:flex; flex-direction:column; justify-content:center; padding:var(--sec-padding-top) var(--sec-padding-side) var(--sec-padding-bottom); overflow-y:var(--sec-overflow-y); scroll-snap-align:start;">
+      <div data-reveal="translateY(30px)" style="position:relative; max-width:var(--card-max-width); max-height:var(--card-max-height); overflow-y:var(--card-overflow-y); background:#fff; border:3px solid #141210; border-radius:3px; box-shadow:8px 8px 0 #141210; padding:var(--card-padding);">
+        <div style="position:absolute; top:-19px; left:24px; transform:rotate(-2deg); background:#141210; color:#fff; font-family:'Bangers',cursive; letter-spacing:1.5px; font-size:15px; padding:4px 13px;">CHAPTER 01 · ABOUT</div>
+        <h2 style="font-family:'Bangers',cursive; font-size:var(--h2-font-size); letter-spacing:1px; margin:8px 0 14px; color:#141210;">Who I am</h2>
+        <p style="margin:0 0 14px; font-size:var(--body-font-size); line-height:1.62; color:#2c2822;">Computer Science Engineering undergraduate with experience in <span style="background:linear-gradient(180deg,transparent 58%, rgba(226,58,44,.28) 58%);">software engineering, startup operations, and technical leadership</span>. I work at the intersection of product execution, engineering management, and community leadership — driving initiatives from concept to deployment while coordinating teams, partnerships, and large-scale events.</p>
+        <p style="margin:0; font-size:var(--body-font-size); line-height:1.62; color:#2c2822;">Alongside my entrepreneurial journey, I actively contribute to IEEE at the Student Branch, Hub, India Council, and Kerala Section levels — leading programs that empower students and technology communities.</p>
+      </div>
+      <div class="doodle-halftone" style="position:absolute; right:6vw; top:20vh; width:120px; height:120px; border-radius:50%; background:radial-gradient(#14121022 1.6px, transparent 1.7px) 0 0/9px 9px; animation:floaty 5s ease-in-out infinite; opacity:.7;"></div>
+      <div data-sign="" style="position:absolute; bottom:8.2vh; left:3vw;">
+        <div style="width:3px; height:6vh; background:#141210; margin:0 auto;"></div>
+        <div style="position:absolute; top:-4px; left:-4px; transform:rotate(-3deg); background:#fff; border:2.5px solid #141210; box-shadow:3px 3px 0 #141210; padding:5px 11px; font-family:'Bangers',cursive; letter-spacing:1px; font-size:14px; white-space:nowrap;">01 · ABOUT</div>
+      </div>
+    </section>
+
+    <!-- ---- EXPERIENCE ---- -->
+    <section id="experience" data-screen-label="Experience" style="flex:0 0 auto; position:relative; height:100vh; width:var(--exp-width); min-width:var(--exp-min-width); display:flex; flex-direction:column; justify-content:center; padding:var(--sec-padding-top) var(--sec-padding-side) var(--sec-padding-bottom); overflow-y:var(--sec-overflow-y); scroll-snap-align:start;">
+      <div data-reveal="translateY(30px)" style="position:relative; max-width:var(--card-max-width); max-height:var(--card-max-height); overflow-y:var(--card-overflow-y); background:#fff; border:3px solid #141210; border-radius:3px; box-shadow:8px 8px 0 #141210; padding:var(--card-padding);">
+        <div style="position:absolute; top:-19px; left:24px; transform:rotate(-2deg); background:var(--accent); color:#fff; font-family:'Bangers',cursive; letter-spacing:1.5px; font-size:15px; padding:4px 13px;">CHAPTER 02 · EXPERIENCE</div>
+        <div style="display:flex; align-items:baseline; justify-content:space-between; flex-wrap:wrap; gap:8px; margin:8px 0 4px;">
+          <h2 style="font-family:'Bangers',cursive; font-size:var(--h2-font-size-exp); letter-spacing:1px; margin:0; color:#141210;">Co-Founder &amp; COO</h2>
+          <span style="font-weight:700; font-size:15px; color:var(--accent);">Current</span>
+        </div>
+        <div style="font-weight:700; font-size:19px; color:#141210; margin-bottom:14px;">Txtudio Coretech Pvt. Ltd.</div>
+        <p style="margin:0; font-size:var(--body-font-size-exp); line-height:1.6; color:#2c2822;">Leading business operations, product strategy, engineering coordination, partnerships, and execution across multiple technology initiatives. Responsible for aligning technical development with business objectives while overseeing day-to-day operations and growth.</p>
+        <div style="display:flex; gap:8px; flex-wrap:wrap; margin-top:18px;">
+          <span style="font-size:13.5px; font-weight:600; border:2px solid #141210; border-radius:20px; padding:4px 11px;">Operations</span>
+          <span style="font-size:13.5px; font-weight:600; border:2px solid #141210; border-radius:20px; padding:4px 11px;">Product Strategy</span>
+          <span style="font-size:13.5px; font-weight:600; border:2px solid #141210; border-radius:20px; padding:4px 11px;">Engineering</span>
+          <span style="font-size:13.5px; font-weight:600; border:2px solid #141210; border-radius:20px; padding:4px 11px;">Partnerships</span>
+        </div>
+      </div>
+      <div data-sign="" style="position:absolute; bottom:8.2vh; left:3vw;">
+        <div style="width:3px; height:6vh; background:#141210; margin:0 auto;"></div>
+        <div style="position:absolute; top:-4px; left:-4px; transform:rotate(2deg); background:#fff; border:2.5px solid #141210; box-shadow:3px 3px 0 #141210; padding:5px 11px; font-family:'Bangers',cursive; letter-spacing:1px; font-size:14px; white-space:nowrap;">02 · EXPERIENCE</div>
+      </div>
+    </section>
+
+    <!-- ---- LEADERSHIP ---- -->
+    <section id="leadership" data-screen-label="Leadership" style="flex:0 0 auto; position:relative; height:100vh; width:var(--lead-width); min-width:var(--lead-min-width); display:flex; flex-direction:column; justify-content:center; padding:var(--sec-padding-top) var(--sec-padding-side) var(--sec-padding-bottom); overflow-y:var(--sec-overflow-y); scroll-snap-align:start;">
+      <div data-reveal="translateY(20px)" style="margin-bottom:22px; display:flex; align-items:center; gap:14px;">
+        <span style="transform:rotate(-2deg); background:#141210; color:#fff; font-family:'Bangers',cursive; letter-spacing:1.5px; font-size:15px; padding:5px 14px; box-shadow:4px 4px 0 var(--accent);">CHAPTER 03 · LEADERSHIP</span>
+        <span style="font-family:'Bangers',cursive; font-size:var(--h2-font-size); letter-spacing:1px; color:#141210;">Inside IEEE</span>
+      </div>
+      <div style="display:flex; flex-direction:var(--lead-flex-direction); align-items:stretch; gap:16px;">
+        <sc-for list="{{ orgs }}" as="org" hint-placeholder-count="3">
+          <div data-reveal="translateY(26px)" style="display:flex; flex-direction:var(--lead-group-direction); align-items:stretch; gap:13px; width:var(--lead-group-width);">
+            <div style="flex:0 0 auto; width:var(--lead-org-width); background:#141210; color:#fff; border-radius:3px; padding:13px 14px; display:flex; flex-direction:column; justify-content:center; box-shadow:5px 5px 0 rgba(20,18,16,.16);">
+              <div style="font-family:'Bangers',cursive; font-size:19px; letter-spacing:.5px; line-height:1.06;">{{ org.org }}</div>
+              <div style="font-size:11px; font-weight:600; opacity:.72; margin-top:5px; letter-spacing:.5px; text-transform:uppercase;">{{ org.tag }}</div>
+            </div>
+            <sc-for list="{{ org.roles }}" as="role" hint-placeholder-count="2">
+              <div style="flex:0 0 auto; width:var(--lead-card-width); background:#fff; border:2.5px solid #141210; border-radius:3px; box-shadow:5px 5px 0 #141210; padding:13px 15px; display:flex; flex-direction:column;">
+                <div style="font-weight:700; font-size:15px; line-height:1.24; color:#141210;">{{ role.title }}</div>
+                <div style="font-size:11.5px; font-weight:700; color:var(--accent); margin:4px 0 7px;">{{ role.period }}</div>
+                <div style="font-size:13px; line-height:1.42; color:#3a352f;">{{ role.desc }}</div>
+              </div>
+            </sc-for>
+          </div>
+        </sc-for>
+      </div>
+      <div data-sign="" style="position:absolute; bottom:8.2vh; left:2vw;">
+        <div style="width:3px; height:6vh; background:#141210; margin:0 auto;"></div>
+        <div style="position:absolute; top:-4px; left:-4px; transform:rotate(-3deg); background:#fff; border:2.5px solid #141210; box-shadow:3px 3px 0 #141210; padding:5px 11px; font-family:'Bangers',cursive; letter-spacing:1px; font-size:14px; white-space:nowrap;">03 · LEADERSHIP</div>
+      </div>
+    </section>
+
+    <!-- ---- WHAT I DO ---- -->
+    <section id="skills" data-screen-label="What I Do" style="flex:0 0 auto; position:relative; height:100vh; width:var(--skills-width); min-width:var(--skills-min-width); display:flex; flex-direction:column; justify-content:center; padding:var(--sec-padding-top) var(--sec-padding-side) var(--sec-padding-bottom); overflow-y:var(--sec-overflow-y); scroll-snap-align:start;">
+      <div data-reveal="translateY(26px)" style="margin-bottom:8px;">
+        <span style="transform:rotate(-2deg); display:inline-block; background:var(--accent); color:#fff; font-family:'Bangers',cursive; letter-spacing:1.5px; font-size:15px; padding:5px 14px; box-shadow:4px 4px 0 #141210;">CHAPTER 04</span>
+        <h2 style="font-family:'Bangers',cursive; font-size:var(--h2-font-size); letter-spacing:1px; margin:14px 0 0; color:#141210;">What I Do</h2>
+      </div>
+      <div data-reveal="translateY(30px)" style="display:flex; flex-wrap:wrap; gap:11px; max-width:100%; margin-top:8px;">
+        <sc-for list="{{ skills }}" as="skill" hint-placeholder-count="9">
+          <span style="font-weight:600; font-size:15.5px; color:#141210; background:#fff; border:2.5px solid #141210; border-radius:26px; padding:8px 16px; box-shadow:3px 3px 0 #141210; cursor:default; transition:transform .15s ease, background .15s ease, color .15s ease;" style-hover="transform:translateY(-3px) rotate(-1.5deg); background:#141210; color:#fff;">{{ skill }}</span>
+        </sc-for>
+      </div>
+      <div data-sign="" style="position:absolute; bottom:8.2vh; left:3vw;">
+        <div style="width:3px; height:6vh; background:#141210; margin:0 auto;"></div>
+        <div style="position:absolute; top:-4px; left:-4px; transform:rotate(2deg); background:#fff; border:2.5px solid #141210; box-shadow:3px 3px 0 #141210; padding:5px 11px; font-family:'Bangers',cursive; letter-spacing:1px; font-size:14px; white-space:nowrap;">04 · SKILLS</div>
+      </div>
+    </section>
+
+    <!-- ---- HIGHLIGHTS ---- -->
+    <section id="highlights" data-screen-label="Highlights" style="flex:0 0 auto; position:relative; height:100vh; width:var(--hl-width); min-width:var(--hl-min-width); display:flex; flex-direction:column; justify-content:center; padding:var(--sec-padding-top) var(--sec-padding-side) var(--sec-padding-bottom); overflow-y:var(--sec-overflow-y); scroll-snap-align:start;">
+      <div data-reveal="translateY(24px)" style="margin-bottom:18px;">
+        <span style="transform:rotate(-2deg); display:inline-block; background:#141210; color:#fff; font-family:'Bangers',cursive; letter-spacing:1.5px; font-size:15px; padding:5px 14px; box-shadow:4px 4px 0 var(--accent);">CHAPTER 05</span>
+        <h2 style="font-family:'Bangers',cursive; font-size:var(--h2-font-size); letter-spacing:1px; margin:12px 0 0; color:#141210;">Leadership Highlights</h2>
+      </div>
+      <div style="display:flex; flex-direction:var(--hl-flex-direction); gap:16px; align-items:stretch;">
+        <sc-for list="{{ highlights }}" as="hl" hint-placeholder-count="5">
+          <div data-reveal="translateY(24px)" style="flex:0 0 auto; width:var(--hl-card-width); background:#fff; border:2.5px solid #141210; border-radius:3px; box-shadow:6px 6px 0 #141210; padding:16px 18px; display:flex; flex-direction:column; gap:11px;">
+            <span style="flex:0 0 auto; width:34px; height:34px; border:2.5px solid #141210; border-radius:50%; display:flex; align-items:center; justify-content:center; font-family:'Bangers',cursive; font-size:17px; color:var(--accent);">✓</span>
+            <span style="font-size:14.5px; line-height:1.46; color:#2c2822;">{{ hl }}</span>
+          </div>
+        </sc-for>
+      </div>
+      <div data-sign="" style="position:absolute; bottom:8.2vh; left:3vw;">
+        <div style="width:3px; height:6vh; background:#141210; margin:0 auto;"></div>
+        <div style="position:absolute; top:-4px; left:-4px; transform:rotate(-3deg); background:#fff; border:2.5px solid #141210; box-shadow:3px 3px 0 #141210; padding:5px 11px; font-family:'Bangers',cursive; letter-spacing:1px; font-size:14px; white-space:nowrap;">05 · HIGHLIGHTS</div>
+      </div>
+    </section>
+
+    <!-- ---- EDUCATION ---- -->
+    <section id="education" data-screen-label="Education" style="flex:0 0 auto; position:relative; height:100vh; width:var(--edu-width); min-width:var(--edu-min-width); display:flex; flex-direction:column; justify-content:center; padding:var(--sec-padding-top) var(--sec-padding-side) var(--sec-padding-bottom); overflow-y:var(--sec-overflow-y); scroll-snap-align:start;">
+      <div data-reveal="translateY(30px)" style="position:relative; max-width:var(--card-max-width); max-height:var(--card-max-height); overflow-y:var(--card-overflow-y); background:#fff; border:3px solid #141210; border-radius:3px; box-shadow:8px 8px 0 #141210; padding:var(--card-padding);">
+        <div style="position:absolute; top:-19px; left:24px; transform:rotate(-2deg); background:#141210; color:#fff; font-family:'Bangers',cursive; letter-spacing:1.5px; font-size:15px; padding:4px 13px;">CHAPTER 06 · EDUCATION</div>
+        <div style="display:flex; align-items:center; gap:16px; margin-top:6px;">
+          <span style="flex:0 0 auto; font-size:42px; line-height:1;">🎓</span>
+          <div>
+            <h2 style="font-family:'Bangers',cursive; font-size:32px; letter-spacing:1px; margin:0; color:#141210;">B.Tech.</h2>
+            <div style="font-weight:700; font-size:18px; color:#2c2822;">Computer Science &amp; Engineering</div>
+          </div>
+        </div>
+        <p style="margin:16px 0 0; font-size:16.5px; line-height:1.55; color:#4a443d; font-style:italic;">Undergraduate — building the technical foundation behind every project, team, and community I lead.</p>
+      </div>
+      <div data-sign="" style="position:absolute; bottom:8.2vh; left:3vw;">
+        <div style="width:3px; height:6vh; background:#141210; margin:0 auto;"></div>
+        <div style="position:absolute; top:-4px; left:-4px; transform:rotate(2deg); background:#fff; border:2.5px solid #141210; box-shadow:3px 3px 0 #141210; padding:5px 11px; font-family:'Bangers',cursive; letter-spacing:1px; font-size:14px; white-space:nowrap;">06 · EDUCATION</div>
+      </div>
+    </section>
+
+    <!-- ---- PHILOSOPHY ---- -->
+    <section id="philosophy" data-screen-label="Philosophy" style="flex:0 0 auto; position:relative; height:100vh; width:var(--phil-width); min-width:var(--phil-min-width); display:flex; flex-direction:column; justify-content:center; padding:var(--sec-padding-top) var(--sec-padding-side) var(--sec-padding-bottom); overflow-y:var(--sec-overflow-y); scroll-snap-align:start;">
+      <div data-reveal="translateY(24px)" style="margin-bottom:16px;">
+        <span style="transform:rotate(-2deg); display:inline-block; background:var(--accent); color:#fff; font-family:'Bangers',cursive; letter-spacing:1.5px; font-size:15px; padding:5px 14px; box-shadow:4px 4px 0 #141210;">CHAPTER 07 · PHILOSOPHY</span>
+      </div>
+      <div data-reveal="translateY(30px)" style="position:relative; max-width:var(--card-max-width); max-height:var(--card-max-height); overflow-y:var(--card-overflow-y); background:#fff; border:3px solid #141210; border-radius:22px; box-shadow:9px 9px 0 #141210; padding:38px 42px;">
+        <span style="position:absolute; top:-28px; left:34px; font-family:'Bangers',cursive; font-size:80px; line-height:1; color:var(--accent);">“</span>
+        <p style="margin:0; font-size:clamp(20px,2.6vw,30px); line-height:1.4; font-weight:500; color:#141210;">Building impactful technology is not just about writing code — it's about understanding people, solving meaningful problems, and leading teams that can turn ideas into reality.</p>
+        <div style="position:absolute; bottom:-16px; left:60px; width:26px; height:26px; background:#fff; border-right:3px solid #141210; border-bottom:3px solid #141210; transform:rotate(45deg);"></div>
+      </div>
+      <div data-sign="" style="position:absolute; bottom:8.2vh; left:3vw;">
+        <div style="width:3px; height:6vh; background:#141210; margin:0 auto;"></div>
+        <div style="position:absolute; top:-4px; left:-4px; transform:rotate(-3deg); background:#fff; border:2.5px solid #141210; box-shadow:3px 3px 0 #141210; padding:5px 11px; font-family:'Bangers',cursive; letter-spacing:1px; font-size:14px; white-space:nowrap;">07 · PHILOSOPHY</div>
+      </div>
+    </section>
+
+    <!-- ---- CONTACT ---- -->
+    <section id="contact" data-screen-label="Contact" style="flex:0 0 auto; position:relative; height:100vh; width:var(--contact-width); min-width:var(--contact-min-width); display:flex; flex-direction:column; justify-content:center; align-items:center; text-align:center; padding:var(--sec-padding-top) var(--sec-padding-side) var(--sec-padding-bottom); overflow-y:var(--sec-overflow-y); scroll-snap-align:start;">
+      <div data-reveal="translateY(30px)" style="transform:rotate(-2deg); background:var(--accent); color:#fff; font-family:'Bangers',cursive; font-size:clamp(32px,8vw,86px); letter-spacing:2px; line-height:.95; padding:14px 34px; border:3px solid #141210; box-shadow:8px 8px 0 #141210;">LET'S TALK!</div>
+      <p data-reveal="translateY(22px)" style="margin:26px 0 22px; font-size:19px; font-weight:500; color:#2c2822; max-width:520px;">Got a project, a team, or a community that needs momentum? I'd love to hear about it.</p>
+      <div data-reveal="translateY(24px)" style="display:flex; gap:16px; flex-wrap:wrap; justify-content:center;">
+        <a href="mailto:iamdevangcv@gmail.com" style="text-decoration:none; display:inline-flex; align-items:center; gap:9px; font-family:'Shantell Sans',cursive; font-weight:700; font-size:18px; color:#141210; background:#fff; border:3px solid #141210; border-radius:12px; box-shadow:5px 5px 0 #141210; padding:12px 22px; transition:transform .15s ease;" style-hover="transform:translate(-2px,-2px);"><span style="font-size:20px;">✉</span> iamdevangcv@gmail.com</a>
+        <a href="https://www.linkedin.com/in/devangcv/" target="_blank" rel="noopener" style="text-decoration:none; display:inline-flex; align-items:center; gap:9px; font-family:'Shantell Sans',cursive; font-weight:700; font-size:18px; color:#fff; background:#141210; border:3px solid #141210; border-radius:12px; box-shadow:5px 5px 0 var(--accent); padding:12px 22px; transition:transform .15s ease;" style-hover="transform:translate(-2px,-2px);"><span style="font-weight:800;">in</span> LinkedIn</a>
+      </div>
+      <div data-reveal="translateY(20px)" style="margin-top:40px; font-family:'Bangers',cursive; letter-spacing:2px; font-size:18px; color:#b8b1a8;">— THE END · THANKS FOR WALKING WITH ME —</div>
+    </section>
+
+    <div style="flex:0 0 auto; width:8vw;"></div>
+  </div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:&quot;100%&quot;,&quot;height&quot;:&quot;100%&quot;},&quot;accentColor&quot;:{&quot;editor&quot;:&quot;color&quot;,&quot;default&quot;:&quot;#E23A2C&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;options&quot;:[&quot;#E23A2C&quot;,&quot;#2B6CE6&quot;,&quot;#12A150&quot;,&quot;#141210&quot;]}}">
+class Component extends DCLogic {
+  setRoot = el => { this.root = el; };
+  setTrack = el => { this.track = el; };
+  setChibi = el => { this.chibi = el; };
+  setVideo = el => { this.video = el; };
+  setProg = el => { this.prog = el; };
+  setChibiBob = el => { this.chibiBob = el; };
+
+  renderVals() {
+    const list = [
+      { id: 'hero', label: 'Start' },
+      { id: 'about', label: 'About' },
+      { id: 'experience', label: 'Experience' },
+      { id: 'leadership', label: 'Leadership' },
+      { id: 'skills', label: 'What I Do' },
+      { id: 'highlights', label: 'Highlights' },
+      { id: 'education', label: 'Education' },
+      { id: 'philosophy', label: 'Philosophy' },
+      { id: 'contact', label: 'Contact' },
+    ];
+    const nav = list.map(n => ({ ...n, go: () => this.scrollTo(n.id) }));
+
+    const orgs = [
+      { org: 'IEEE India Council', tag: 'National', roles: [
+        { title: 'Chapter & Affinity Group Coordinator', period: 'Apr 2025 – Mar 2026', desc: 'Coordinating chapter and affinity-group activity across India — strengthening engagement and enabling collaboration between volunteers and organizational units.' },
+      ] },
+      { org: 'IEEE Student Branch CEV', tag: 'Student Branch', roles: [
+        { title: 'Chairperson', period: 'Apr 2024 – Mar 2026', desc: 'Leading one of the region\u2019s most active branches: strategic planning, volunteer development, industry collaboration, technical events, and student engagement.' },
+        { title: 'Membership Development Coordinator', period: 'Apr 2023 – Apr 2024', desc: 'Drove membership growth, volunteer onboarding, and community-engagement programs.' },
+      ] },
+      { org: 'IEEE LINK', tag: 'Malabar Hub', roles: [
+        { title: 'Student Representative — Malabar Hub', period: 'Feb 2025 – Jan 2026', desc: 'Representing branches across the Malabar Hub; facilitating collaboration, organizing regional initiatives, and connecting students with IEEE opportunities.' },
+        { title: 'Co Hub Student Representative', period: 'Jun 2024 – Jan 2025', desc: 'Supported hub-level operations, event coordination, and volunteer management.' },
+        { title: 'Co-Treasurer', period: 'Feb 2024 – Jan 2025', desc: 'Managed financial planning, budgeting, and operational support for flagship programs.' },
+      ] },
+    ];
+    const skills = ['Software Engineering', 'Product Strategy & Execution', 'Startup Operations', 'Technical Project Management', 'Team Leadership', 'Event & Program Management', 'Partnership Development', 'Community Building', 'Process Optimization'];
+    const highlights = [
+      'Led multidisciplinary teams across engineering, design, and operations.',
+      'Organized and coordinated regional and national-level technical initiatives.',
+      'Managed collaborations with academic institutions, industry partners, and professional organizations.',
+      'Built operational processes to improve execution efficiency and scalability.',
+      'Mentored volunteers and student leaders across multiple IEEE organizational units.',
+    ];
+
+    return {
+      nav, orgs, skills, highlights,
+      setRoot: this.setRoot, setTrack: this.setTrack, setChibi: this.setChibi,
+      setVideo: this.setVideo, setProg: this.setProg, setChibiBob: this.setChibiBob,
+      goHome: () => this.scrollTo('hero'),
+    };
+  }
+
+  scrollTo(id) {
+    if (!this.track) return;
+    const el = this.track.querySelector('#' + id);
+    if (!el) return;
+    const isMobile = window.innerWidth <= 768;
+    const left = isMobile
+      ? el.offsetLeft
+      : el.offsetLeft - (window.innerWidth * 0.30) + (el.offsetWidth * 0.02);
+
+    if (isMobile) {
+      this.track.style.scrollSnapType = 'none';
+    }
+
+    this.track.scrollTo({ left: Math.max(0, left), behavior: 'smooth' });
+
+    if (isMobile) {
+      if (this._snapTimeout) clearTimeout(this._snapTimeout);
+      this._snapTimeout = setTimeout(() => {
+        if (this.track) this.track.style.scrollSnapType = 'x mandatory';
+      }, 800);
+    }
+  }
+
+  componentDidMount() {
+    const track = this.track, chibi = this.chibi, v = this.video;
+    if (this.root && this.props.accentColor) this.root.style.setProperty('--accent', this.props.accentColor);
+
+    // frame-by-frame walk cycle preloading
+    const TOTAL = 99;
+    const pad = n => ('00' + n).slice(-3);
+    const imgs = [];
+    for (let i = 0; i < TOTAL; i++) { const im = new Image(); im.src = 'assets/frames/f' + pad(i) + '.png'; imgs.push(im); }
+    let distanceScrolled = 0;
+
+    // wheel -> horizontal
+    this._wheel = (e) => {
+      if (!track) return;
+      const d = Math.abs(e.deltaY) >= Math.abs(e.deltaX) ? e.deltaY : e.deltaX;
+      if (d === 0) return;
+      track.scrollLeft += d;
+      e.preventDefault();
+    };
+    track.addEventListener('wheel', this._wheel, { passive: false });
+
+    // keyboard
+    this._keys = (e) => {
+      if (!track) return;
+      if (e.key === 'ArrowRight' || e.key === 'PageDown') { track.scrollLeft += window.innerWidth * 0.6; e.preventDefault(); }
+      else if (e.key === 'ArrowLeft' || e.key === 'PageUp') { track.scrollLeft -= window.innerWidth * 0.6; e.preventDefault(); }
+    };
+    window.addEventListener('keydown', this._keys);
+
+    // drag to pan
+    let down = false, sx = 0, sl = 0, moved = 0;
+    this._pd = (e) => { down = true; sx = e.clientX; sl = track.scrollLeft; moved = 0; track.style.cursor = 'grabbing'; };
+    this._pm = (e) => { if (!down) return; const dx = e.clientX - sx; moved = Math.abs(dx); track.scrollLeft = sl - dx; };
+    this._pu = () => { down = false; track.style.cursor = ''; };
+    track.addEventListener('pointerdown', this._pd);
+    window.addEventListener('pointermove', this._pm);
+    window.addEventListener('pointerup', this._pu);
+    track.style.cursor = 'grab';
+
+    // direction flip + progress + walk animation mapping
+    let last = track.scrollLeft, facing = 1;
+    this._scroll = () => {
+      const now = track.scrollLeft;
+      const dx = now - last;
+      const absDx = Math.abs(dx);
+
+      // Always update progress bar
+      const max = track.scrollWidth - track.clientWidth;
+      const p = max > 0 ? now / max : 0;
+      if (this.prog) this.prog.style.width = (p * 100) + '%';
+
+      // Only step/update direction when movement is significant (>= 2px) to prevent subpixel jitter
+      if (absDx >= 2.0) {
+        const want = dx < 0 ? -1 : 1;
+        if (want !== facing) { facing = want; if (chibi) chibi.style.setProperty('--face', String(facing)); }
+
+        // Start bobbing animation when scrolling
+        if (this.chibiBob) this.chibiBob.style.animation = 'chibiBob 1.05s ease-in-out infinite';
+
+        // Accumulate distance scrolled and update chibi frame
+        distanceScrolled += absDx;
+        const fi = Math.floor(distanceScrolled / 12) % TOTAL;
+        if (v) v.src = 'assets/frames/f' + pad(fi) + '.png';
+
+        last = now;
+
+        // Clear stop scroll timeout
+        if (this._scrollTimeout) clearTimeout(this._scrollTimeout);
+
+        // Set stop scroll timeout
+        this._scrollTimeout = setTimeout(() => {
+          // Stop bobbing animation
+          if (this.chibiBob) this.chibiBob.style.animation = 'none';
+        }, 150);
+      }
+    };
+    track.addEventListener('scroll', this._scroll, { passive: true });
+
+    // reveal on enter (JS-hidden so no-JS shows everything)
+    const panels = Array.prototype.slice.call(track.querySelectorAll('[data-reveal]'));
+    panels.forEach(p => { p.style.transition = 'none'; p.style.opacity = '0'; p.style.transform = p.getAttribute('data-reveal') || 'translateY(24px)'; });
+    requestAnimationFrame(() => panels.forEach(p => { p.style.transition = 'opacity .55s ease, transform .6s cubic-bezier(.2,.85,.35,1.15)'; }));
+    if ('IntersectionObserver' in window) {
+      const io = new IntersectionObserver((ents) => {
+        ents.forEach(en => { if (en.isIntersecting) { en.target.style.opacity = '1'; en.target.style.transform = 'none'; io.unobserve(en.target); } });
+      }, { root: track, threshold: 0.12 });
+      panels.forEach(p => io.observe(p));
+    } else {
+      panels.forEach(p => { p.style.opacity = '1'; p.style.transform = 'none'; });
+    }
+    this._safety = setTimeout(() => panels.forEach(p => { p.style.opacity = '1'; p.style.transform = 'none'; }), 4500);
+  }
+
+  componentWillUnmount() {
+    if (this.track) {
+      this.track.removeEventListener('wheel', this._wheel);
+      this.track.removeEventListener('scroll', this._scroll);
+      this.track.removeEventListener('pointerdown', this._pd);
+    }
+    window.removeEventListener('keydown', this._keys);
+    window.removeEventListener('pointermove', this._pm);
+    window.removeEventListener('pointerup', this._pu);
+    clearTimeout(this._safety);
+    if (this._scrollTimeout) clearTimeout(this._scrollTimeout);
+    if (this._snapTimeout) clearTimeout(this._snapTimeout);
+  }
+}
+</script>
+</body>
+</html>
