@@ -1,0 +1,41 @@
+---
+import Section from '../ui/Section.astro';
+import { profile } from '../../data/profile';
+
+const button =
+  'inline-flex items-center gap-[9px] rounded-xl border-[3px] border-ink px-[22px] py-3 text-[16px] font-bold transition-transform duration-150 hover:-translate-x-0.5 hover:-translate-y-0.5 md:text-[18px] short:py-2';
+---
+
+<Section id="contact" class="w-screen items-center text-center md:w-[88vw]">
+  <h2
+    data-reveal
+    class="-rotate-2 border-[3px] border-ink bg-accent px-[34px] py-3.5 font-display text-[clamp(40px,8vw,86px)] leading-[0.95] tracking-[2px] text-paper shadow-comic short:py-2 short:text-[40px]"
+  >
+    LET'S TALK!
+  </h2>
+  <p data-reveal class="mt-[26px] mb-[22px] max-w-[520px] text-base font-medium text-body md:text-[19px] short:my-3">
+    {profile.contactPitch}
+  </p>
+  <div data-reveal class="flex flex-wrap justify-center gap-4 short:gap-3">
+    <a href={`mailto:${profile.email}`} class:list={[button, 'bg-paper shadow-comic-md']}>
+      <span aria-hidden="true" class="text-xl">
+        ✉
+      </span>
+      {profile.email}
+    </a>
+    <a
+      href={profile.linkedin}
+      target="_blank"
+      rel="noopener noreferrer"
+      class:list={[button, 'bg-ink text-paper shadow-[5px_5px_0_var(--color-accent)]']}
+    >
+      <span aria-hidden="true" class="font-extrabold">
+        in
+      </span>
+      LinkedIn
+    </a>
+  </div>
+  <p data-reveal class="mt-10 font-display text-lg tracking-[2px] text-faint short:mt-4">
+    — THE END · THANKS FOR WALKING WITH ME —
+  </p>
+</Section>

@@ -1,0 +1,65 @@
+---
+import '@fontsource/bangers/400.css';
+import '@fontsource/shantell-sans/400.css';
+import '@fontsource/shantell-sans/400-italic.css';
+import '@fontsource/shantell-sans/500.css';
+import '@fontsource/shantell-sans/600.css';
+import '@fontsource/shantell-sans/700.css';
+import '../styles/global.css';
+import { profile } from '../data/profile';
+import { frameUrl } from '../lib/frames';
+
+interface Props {
+  title: string;
+  description: string;
+}
+
+const { title, description } = Astro.props;
+const canonical = Astro.site ? new URL(Astro.url.pathname, Astro.site).href : undefined;
+const person = {
+  '@context': 'https://schema.org',
+  '@type': 'Person',
+  name: profile.name,
+  jobTitle: profile.roles.join(', '),
+  email: `mailto:${profile.email}`,
+  sameAs: [profile.linkedin],
+};
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    {canonical && <link rel="canonical" href={canonical} />}
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    {canonical && <meta property="og:url" content={canonical} />}
+    <meta name="twitter:card" content="summary" />
+    <meta name="theme-color" content="#ffffff" />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="preload" as="image" href={frameUrl(0)} type="image/webp" fetchpriority="high" />
+    <script type="application/ld+json" set:html={JSON.stringify(person)} />
+    <script is:inline>
+      // Hide reveal panels only when JS runs; if the journey never boots, show everything.
+      document.documentElement.classList.add('js');
+      setTimeout(() => {
+        if (!document.documentElement.dataset.journey) document.documentElement.classList.add('reveal-all');
+      }, 4000);
+    </script>
+  </head>
+  <body>
+    <svg width="0" height="0" class="absolute" aria-hidden="true">
+      <defs>
+        <filter id="wobble">
+          <feTurbulence type="fractalNoise" baseFrequency="0.015" numOctaves="2" seed="7" result="noise"></feTurbulence>
+          <feDisplacementMap in="SourceGraphic" in2="noise" scale="4"></feDisplacementMap>
+        </filter>
+      </defs>
+    </svg>
+    <slot />
+  </body>
+</html>

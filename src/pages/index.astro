@@ -1,0 +1,29 @@
+---
+import Journey from '../components/journey/Journey';
+import About from '../components/sections/About.astro';
+import Contact from '../components/sections/Contact.astro';
+import Education from '../components/sections/Education.astro';
+import Experience from '../components/sections/Experience.astro';
+import Hero from '../components/sections/Hero.astro';
+import Highlights from '../components/sections/Highlights.astro';
+import Leadership from '../components/sections/Leadership.astro';
+import Philosophy from '../components/sections/Philosophy.astro';
+import Skills from '../components/sections/Skills.astro';
+import { profile } from '../data/profile';
+import BaseLayout from '../layouts/BaseLayout.astro';
+---
+
+<BaseLayout title={`${profile.name} — ${profile.roles.join(' · ')}`} description={profile.tagline}>
+  <Journey client:load>
+    <Hero />
+    <About />
+    <Education />
+    <Leadership />
+    <Highlights />
+    <Experience />
+    <Skills />
+    <Philosophy />
+    <Contact />
+    <div aria-hidden="true" class="w-0 shrink-0 md:w-[8vw]"></div>
+  </Journey>
+</BaseLayout>

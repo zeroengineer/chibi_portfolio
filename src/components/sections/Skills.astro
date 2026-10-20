@@ -1,0 +1,25 @@
+---
+import ChapterTag from '../ui/ChapterTag.astro';
+import Heading from '../ui/Heading.astro';
+import Pill from '../ui/Pill.astro';
+import Section from '../ui/Section.astro';
+import { skills } from '../../data/skills';
+---
+
+<Section id="skills" class="min-w-screen md:min-w-[60vw]">
+  <div data-reveal class="mb-2">
+    <ChapterTag id="skills" tone="accent" named={false} />
+    <Heading class="mt-3.5 short:mt-2">What I Do</Heading>
+  </div>
+  <!-- Phones flow the pills into columns that run along the walk; wider screens wrap them. -->
+  <ul
+    data-reveal
+    class="mt-2 grid auto-cols-max grid-flow-col grid-rows-5 gap-2.5 md:flex md:max-w-[640px] md:flex-wrap md:gap-[11px] short:grid short:max-w-none short:grid-rows-3"
+  >
+    {skills.map((skill) => (
+      <li>
+        <Pill size="md">{skill}</Pill>
+      </li>
+    ))}
+  </ul>
+</Section>

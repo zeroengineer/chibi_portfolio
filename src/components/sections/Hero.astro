@@ -1,0 +1,34 @@
+---
+import Section from '../ui/Section.astro';
+import { profile } from '../../data/profile';
+
+const name = profile.name.toUpperCase().replaceAll(' ', '\u00a0');
+---
+
+<Section id="hero" class="w-screen items-center text-center md:w-[96vw]">
+  <span
+    data-reveal
+    class="mb-5 inline-block -rotate-[1.5deg] border-[2.5px] border-ink bg-accent px-3.5 py-[5px] font-display text-[15px] tracking-[2px] text-paper shadow-[4px_4px_0_var(--color-ink)] short:mb-3"
+  >
+    A WALK THROUGH MY STORY
+  </span>
+  <h1
+    data-reveal
+    class="font-display text-[clamp(52px,11vw,150px)] leading-[0.92] tracking-[2px] [text-shadow:5px_5px_0_rgb(20_18_16/0.12)] short:text-[clamp(44px,9vw,84px)]"
+  >
+    {name}
+  </h1>
+  <p data-reveal class="mt-5 text-[clamp(16px,2vw,23px)] font-semibold tracking-[0.3px] text-[#37322d] short:mt-3">
+    {profile.roles.join('  ·  ')}
+  </p>
+  <p data-reveal class="mt-2 max-w-[34ch] text-[15px] text-[#8a847d] italic md:max-w-none md:text-base">
+    {profile.tagline}
+  </p>
+  <p class="mt-8 flex items-center gap-2.5 font-display text-[19px] tracking-[1.5px] short:mt-4">
+    <span class="pointer-coarse:hidden">SCROLL TO WALK</span>
+    <span class="hidden pointer-coarse:inline">SWIPE UP TO WALK</span>
+    <span aria-hidden="true" class="inline-block animate-nudge text-[26px]">
+      →
+    </span>
+  </p>
+</Section>

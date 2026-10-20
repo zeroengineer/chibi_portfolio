@@ -1,0 +1,24 @@
+---
+import ChapterTag from '../ui/ChapterTag.astro';
+import Section from '../ui/Section.astro';
+import { profile } from '../../data/profile';
+---
+
+<Section id="philosophy" class="min-w-screen md:min-w-[82vw]">
+  <div data-reveal class="mb-6 short:mb-4">
+    <ChapterTag id="philosophy" tone="accent" />
+  </div>
+  <blockquote
+    data-reveal
+    class="relative w-[86vw] max-w-[640px] rounded-[22px] border-[3px] border-ink bg-paper px-6 py-7 shadow-[9px_9px_0_var(--color-ink)] md:px-[42px] md:py-[38px] short:w-[72vw] short:py-4"
+  >
+    <span aria-hidden="true" class="absolute -top-7 left-[34px] font-display text-[80px] leading-none text-accent">
+      “
+    </span>
+    <p class="text-[clamp(18px,2.6vw,30px)] leading-[1.4] font-medium short:text-[18px]">{profile.philosophy}</p>
+    <span
+      aria-hidden="true"
+      class="absolute -bottom-4 left-[60px] size-[26px] rotate-45 border-r-[3px] border-b-[3px] border-ink bg-paper"
+    ></span>
+  </blockquote>
+</Section>

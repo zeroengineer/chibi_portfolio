@@ -1,0 +1,25 @@
+---
+import ChapterTag from '../ui/ChapterTag.astro';
+import ComicCard from '../ui/ComicCard.astro';
+import Heading from '../ui/Heading.astro';
+import Section from '../ui/Section.astro';
+import { profile } from '../../data/profile';
+
+const { degree, field, note } = profile.education;
+---
+
+<Section id="education" class="min-w-screen md:min-w-[66vw]">
+  <ComicCard tagged class="w-[84vw] max-w-[560px] short:w-[64vw]">
+    <ChapterTag id="education" pinned />
+    <div class="mt-1.5 flex items-center gap-4">
+      <span aria-hidden="true" class="shrink-0 text-[42px] leading-none short:text-[32px]">
+        🎓
+      </span>
+      <div>
+        <Heading size="md">{degree}</Heading>
+        <div class="text-base font-bold text-body md:text-lg">{field}</div>
+      </div>
+    </div>
+    <p class="mt-4 text-[15px] leading-[1.55] text-[#4a443d] italic md:text-[16.5px] short:mt-2">{note}</p>
+  </ComicCard>
+</Section>

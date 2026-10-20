@@ -1,0 +1,28 @@
+---
+import ChapterTag from '../ui/ChapterTag.astro';
+import ComicCard from '../ui/ComicCard.astro';
+import Heading from '../ui/Heading.astro';
+import Prose from '../ui/Prose.astro';
+import Section from '../ui/Section.astro';
+import { profile } from '../../data/profile';
+
+const { intro, community } = profile.about;
+---
+
+<Section id="about" class="min-w-screen md:min-w-[78vw]">
+  <div class="flex items-center gap-6 md:gap-8">
+    <ComicCard tagged class="w-[84vw] max-w-[580px] short:w-[62vw]">
+      <ChapterTag id="about" pinned />
+      <Heading class="mt-2 mb-3.5 short:mt-0 short:mb-2">Who I am</Heading>
+      <!-- prettier-ignore -->
+      <Prose>{intro.before}<span class="marker">{intro.highlight}</span>{intro.after}</Prose>
+    </ComicCard>
+    <ComicCard class="w-[84vw] max-w-[460px] short:w-[52vw]">
+      <Prose>{community}</Prose>
+    </ComicCard>
+  </div>
+  <div
+    aria-hidden="true"
+    class="absolute right-[4vw] bottom-[calc(var(--ground-h)+5svh)] size-[120px] animate-floaty rounded-full bg-[radial-gradient(#14121022_1.6px,transparent_1.7px)] bg-size-[9px_9px] opacity-70 short:hidden"
+  ></div>
+</Section>

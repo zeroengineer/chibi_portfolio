@@ -1,0 +1,20 @@
+---
+interface Props {
+  class?: string;
+  /** Extra spacing for a ChapterTag pinned to the top edge. */
+  tagged?: boolean;
+}
+
+const { class: className, tagged = false } = Astro.props;
+---
+
+<div
+  data-reveal
+  class:list={[
+    'relative rounded-[3px] border-[3px] border-ink bg-paper px-[18px] py-4 shadow-comic md:px-[34px] md:py-[30px] short:px-5 short:py-3',
+    tagged && 'pt-6 md:pt-[34px] short:pt-5',
+    className,
+  ]}
+>
+  <slot />
+</div>

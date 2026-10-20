@@ -1,0 +1,26 @@
+---
+import { getChapter, type ChapterId } from '../../data/chapters';
+
+interface Props {
+  id: ChapterId;
+  tone?: 'ink' | 'accent';
+  /** Pinned to the top edge of a ComicCard instead of sitting inline. */
+  pinned?: boolean;
+  /** Include the chapter name after the number. */
+  named?: boolean;
+}
+
+const { id, tone = 'ink', pinned = false, named = true } = Astro.props;
+const chapter = getChapter(id);
+---
+
+<span
+  class:list={[
+    'inline-block -rotate-2 px-[13px] py-1 font-display text-[15px] tracking-[1.5px] text-paper short:text-[13px]',
+    tone === 'ink' ? 'bg-ink' : 'bg-accent',
+    pinned ? 'absolute -top-[19px] left-6' : tone === 'ink' ? 'shadow-comic-accent' : 'shadow-comic-sm',
+  ]}
+>
+  CHAPTER {chapter.number}
+  {named && ` · ${chapter.nav.toUpperCase()}`}
+</span>

@@ -1,0 +1,28 @@
+---
+import ChapterTag from '../ui/ChapterTag.astro';
+import ComicCard from '../ui/ComicCard.astro';
+import Heading from '../ui/Heading.astro';
+import Pill from '../ui/Pill.astro';
+import Prose from '../ui/Prose.astro';
+import Section from '../ui/Section.astro';
+import { experience } from '../../data/experience';
+---
+
+<Section id="experience" class="min-w-screen md:min-w-[80vw]">
+  <ComicCard tagged class="w-[86vw] max-w-[640px] short:w-[70vw]">
+    <ChapterTag id="experience" tone="accent" pinned />
+    <div class="mt-2 mb-1 flex flex-wrap items-baseline justify-between gap-x-2 short:mt-0">
+      <Heading>{experience.role}</Heading>
+      <span class="text-[15px] font-bold text-accent">{experience.status}</span>
+    </div>
+    <div class="mb-3.5 text-[17px] font-bold md:text-[19px] short:mb-2">{experience.company}</div>
+    <Prose>{experience.summary}</Prose>
+    <ul class="mt-[18px] flex flex-wrap gap-2 short:mt-3">
+      {experience.tags.map((tag) => (
+        <li>
+          <Pill>{tag}</Pill>
+        </li>
+      ))}
+    </ul>
+  </ComicCard>
+</Section>

@@ -1,0 +1,18 @@
+---
+interface Props {
+  size?: 'sm' | 'md';
+}
+
+const { size = 'sm' } = Astro.props;
+---
+
+<span
+  class:list={[
+    'inline-block border-ink font-semibold whitespace-nowrap',
+    size === 'sm'
+      ? 'rounded-full border-2 px-[11px] py-1 text-[13.5px]'
+      : 'cursor-default rounded-[26px] border-[2.5px] bg-paper px-4 py-2 text-[15.5px] shadow-comic-sm transition-[transform,background-color,color] duration-150 hover:-translate-y-[3px] hover:-rotate-[1.5deg] hover:bg-ink hover:text-paper short:px-3 short:py-1.5 short:text-[14px]',
+  ]}
+>
+  <slot />
+</span>
