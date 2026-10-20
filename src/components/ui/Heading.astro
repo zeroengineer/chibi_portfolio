@@ -1,0 +1,20 @@
+---
+interface Props {
+  class?: string;
+  size?: 'lg' | 'md';
+}
+
+const { class: className, size = 'lg' } = Astro.props;
+---
+
+<h2
+  class:list={[
+    'font-display leading-tight tracking-[1px]',
+    size === 'lg'
+      ? 'text-[28px] md:text-[34px] xl:text-[40px] short:text-[24px]'
+      : 'text-[26px] md:text-[32px] short:text-[22px]',
+    className,
+  ]}
+>
+  <slot />
+</h2>

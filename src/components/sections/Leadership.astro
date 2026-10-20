@@ -1,0 +1,30 @@
+---
+import ChapterTag from '../ui/ChapterTag.astro';
+import Heading from '../ui/Heading.astro';
+import Section from '../ui/Section.astro';
+import { leadership } from '../../data/leadership';
+---
+
+<Section id="leadership" class="min-w-screen">
+  <div data-reveal class="mb-[22px] flex flex-wrap items-center gap-x-3.5 gap-y-2 short:mb-3">
+    <ChapterTag id="leadership" />
+    <Heading>Inside IEEE</Heading>
+  </div>
+  <div class="flex items-stretch gap-4 short:gap-3">
+    {leadership.map((org) => (
+      <div data-phase={org.phase} data-reveal class="flex items-stretch gap-[13px]">
+        <div class="flex w-[40vw] max-w-[150px] shrink-0 flex-col justify-center rounded-[3px] bg-ink px-3.5 py-[13px] text-paper shadow-[5px_5px_0_rgb(20_18_16/0.16)] md:w-[132px]">
+          <h3 class="font-display text-[19px] leading-[1.06] tracking-[0.5px]">{org.org}</h3>
+          <div class="mt-[5px] text-[11px] font-semibold tracking-[0.5px] uppercase opacity-70">{org.tag}</div>
+        </div>
+        {org.roles.map((role) => (
+          <article class="flex w-[68vw] max-w-[280px] shrink-0 flex-col rounded-[3px] border-[2.5px] border-ink bg-paper px-[15px] py-[13px] shadow-comic-md md:w-[230px] short:w-[230px] short:py-2.5">
+            <h4 class="text-[15px] leading-[1.24] font-bold">{role.title}</h4>
+            <div class="mt-1 mb-[7px] text-[11.5px] font-bold text-accent">{role.period}</div>
+            <p class="text-[13px] leading-[1.42] text-subtle">{role.desc}</p>
+          </article>
+        ))}
+      </div>
+    ))}
+  </div>
+</Section>

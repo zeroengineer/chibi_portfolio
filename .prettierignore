@@ -1,0 +1,7 @@
+dist/
+.astro/
+node_modules/
+raw-assets/
+public/frames/
+package-lock.json
+src/data/frames.json

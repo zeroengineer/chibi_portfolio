@@ -1,0 +1,35 @@
+---
+import { getChapter, type ChapterId } from '../../data/chapters';
+
+interface Props {
+  id: ChapterId;
+  class?: string;
+}
+
+const { id, class: className } = Astro.props;
+const chapter = getChapter(id);
+const tilt = Number(chapter.number) % 2 ? '-rotate-3' : 'rotate-2';
+---
+
+<section
+  id={id}
+  data-chapter
+  data-phase={chapter.phase}
+  aria-label={chapter.nav}
+  class:list={['chapter relative flex h-full shrink-0 flex-col justify-center', className]}
+>
+  <slot />
+  {chapter.sign && (
+    <div aria-hidden="true" class="absolute bottom-(--ground-h) left-[3vw] short:hidden">
+      <div class="mx-auto h-[6svh] w-[3px] bg-ink" />
+      <div
+        class:list={[
+          'absolute -top-1 -left-1 border-[2.5px] border-ink bg-paper px-[11px] py-[5px] font-display text-sm tracking-[1px] whitespace-nowrap shadow-comic-sm',
+          tilt,
+        ]}
+      >
+        {chapter.number} · {chapter.sign.toUpperCase()}
+      </div>
+    </div>
+  )}
+</section>

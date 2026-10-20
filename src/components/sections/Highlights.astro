@@ -1,0 +1,29 @@
+---
+import ChapterTag from '../ui/ChapterTag.astro';
+import Heading from '../ui/Heading.astro';
+import Section from '../ui/Section.astro';
+import { highlights } from '../../data/highlights';
+---
+
+<Section id="highlights" class="min-w-screen">
+  <div data-reveal class="mb-[18px] short:mb-3">
+    <ChapterTag id="highlights" named={false} />
+    <Heading class="mt-3 short:mt-2">Leadership Highlights</Heading>
+  </div>
+  <ul class="flex items-stretch gap-4 short:gap-3">
+    {highlights.map((highlight) => (
+      <li
+        data-reveal
+        class="flex w-[62vw] max-w-[260px] shrink-0 flex-col gap-[11px] rounded-[3px] border-[2.5px] border-ink bg-paper px-[18px] py-4 shadow-[6px_6px_0_var(--color-ink)] md:w-[224px] short:w-[210px] short:gap-2 short:py-3"
+      >
+        <span
+          aria-hidden="true"
+          class="flex size-[34px] shrink-0 items-center justify-center rounded-full border-[2.5px] border-ink font-display text-[17px] text-accent short:size-7"
+        >
+          ✓
+        </span>
+        <span class="text-[14.5px] leading-[1.46] text-body">{highlight}</span>
+      </li>
+    ))}
+  </ul>
+</Section>

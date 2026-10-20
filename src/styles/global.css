@@ -1,0 +1,161 @@
+@import 'tailwindcss';
+@import 'lenis/dist/lenis.css';
+
+/* Phones held sideways: very little height, so content uses the full band and the walker steps aside. */
+@custom-variant short (@media (orientation: landscape) and (max-height: 560px));
+
+@theme {
+  --color-ink: #141210;
+  --color-paper: #ffffff;
+  --color-accent: #e23a2c;
+  --color-body: #2c2822;
+  --color-subtle: #3a352f;
+  --color-muted: #7a756f;
+  --color-faint: #b8b1a8;
+  --color-rail: #efeae3;
+
+  --font-display: 'Bangers', cursive;
+  --font-hand: 'Shantell Sans', cursive;
+
+  --animate-floaty: floaty 5s ease-in-out infinite;
+  --animate-nudge: nudge 1s ease-in-out infinite;
+  --animate-bob: bob 0.9s ease-in-out infinite;
+
+  @keyframes floaty {
+    0%,
+    100% {
+      transform: translateY(0);
+    }
+    50% {
+      transform: translateY(-10px);
+    }
+  }
+  @keyframes nudge {
+    0%,
+    100% {
+      transform: translate(0, 0);
+    }
+    50% {
+      transform: translate(var(--nudge-x, 9px), var(--nudge-y, 0));
+    }
+  }
+  @keyframes bob {
+    0%,
+    100% {
+      transform: translateY(0) rotate(-0.6deg);
+    }
+    50% {
+      transform: translateY(-6px) rotate(0.6deg);
+    }
+  }
+}
+
+@utility shadow-comic {
+  box-shadow: 8px 8px 0 var(--color-ink);
+}
+@utility shadow-comic-md {
+  box-shadow: 5px 5px 0 var(--color-ink);
+}
+@utility shadow-comic-sm {
+  box-shadow: 3px 3px 0 var(--color-ink);
+}
+@utility shadow-comic-accent {
+  box-shadow: 4px 4px 0 var(--color-accent);
+}
+@utility marker {
+  background: linear-gradient(180deg, transparent 58%, color-mix(in srgb, var(--color-accent) 28%, transparent) 58%);
+}
+
+/*
+ * Stage geometry. Everything is laid out in a band between the header and the
+ * strip at the bottom where the walker stands on the ground line.
+ */
+:root {
+  --header-h: 57px;
+  --rail-h: 4px;
+  --ground-h: clamp(28px, 7svh, 64px);
+  --chibi-h: clamp(150px, 33svh, 300px);
+  --chibi-x: 50vw;
+  --lane-left: 0px;
+  --sec-px: clamp(20px, 5vw, 80px);
+  --content-top: calc(var(--header-h) + var(--rail-h) + clamp(28px, 6svh, 64px));
+  --content-bottom: calc(var(--ground-h) + var(--chibi-h) * 0.85 + 16px);
+}
+
+@media (max-width: 767px) {
+  :root {
+    --header-h: 50px;
+    --chibi-h: clamp(130px, 26svh, 220px);
+    --content-top: calc(var(--header-h) + var(--rail-h) + clamp(18px, 4svh, 40px));
+  }
+}
+
+@media (orientation: landscape) and (max-height: 560px) {
+  :root {
+    --header-h: 44px;
+    --ground-h: 26px;
+    --chibi-h: clamp(96px, 30svh, 150px);
+    --chibi-x: 9vw;
+    --lane-left: calc(var(--chibi-x) + var(--chibi-h) * 0.4);
+    --content-top: calc(var(--header-h) + var(--rail-h) + 14px);
+    --content-bottom: calc(var(--ground-h) + 14px);
+  }
+}
+
+@layer base {
+  html {
+    scrollbar-width: none;
+  }
+  html::-webkit-scrollbar {
+    display: none;
+  }
+  body {
+    background: var(--color-paper);
+    color: var(--color-ink);
+    font-family: var(--font-hand);
+    -webkit-font-smoothing: antialiased;
+  }
+}
+
+@layer components {
+  .chapter {
+    padding: var(--content-top) var(--sec-px) var(--content-bottom) max(var(--sec-px), var(--lane-left));
+  }
+
+  /* Without the engine (no JS yet) the world is a plain horizontal scroller. */
+  html:not([data-journey]) .stage {
+    overflow-x: auto;
+  }
+
+  .chibi-bob[data-moving='true'] {
+    animation: var(--animate-bob);
+  }
+
+  /* Reveal-on-enter: hidden only once JS is known to run; the engine adds .is-revealed. */
+  .js [data-reveal]:not(.is-revealed) {
+    opacity: 0;
+    translate: 0 26px;
+  }
+  .js [data-reveal] {
+    transition:
+      opacity 0.55s ease,
+      translate 0.6s cubic-bezier(0.2, 0.85, 0.35, 1.15);
+  }
+  .js.reveal-all [data-reveal] {
+    opacity: 1;
+    translate: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .js [data-reveal]:not(.is-revealed) {
+    opacity: 1;
+    translate: none;
+  }
+  *,
+  *::before,
+  *::after {
+    animation: none !important;
+    transition: none !important;
+  }
+}
